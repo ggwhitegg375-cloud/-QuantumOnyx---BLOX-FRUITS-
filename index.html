@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>QuantumOnyx-BloxFruits</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  min-height:100vh;
+  min-height:100dvh;
+  background:#100e0d;
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+  display:flex;
+  justify-content:center;
+  overflow-x:hidden;
+}
+
+.container{
+  width:100%;
+  max-width:380px;
+  min-height:100vh;
+  min-height:100dvh;
+  background:#1d1d1d;
+  border-left:1px solid #333;
+  border-right:1px solid #333;
+  padding:0 16px 22px;
+}
+
+.banner{
+  width:100%;
+  height:225px;
+  object-fit:cover;
+  display:block;
+  border-radius:0 0 14px 14px;
+}
+
+.title{
+  text-align:center;
+  font-size:22px;
+  font-weight:800;
+  line-height:1.25;
+  margin:10px 0 4px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#cfcfcf;
+  font-size:14px;
+  line-height:1.4;
+  margin-bottom:12px;
+}
+
+.task{
+  width:100%;
+  min-height:48px;
+  height:auto;
+  border:0;
+  border-radius:12px;
+  margin:6px 0;
+  padding:10px 12px;
+  color:white;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.15s transform,.15s filter;
+  touch-action:manipulation;
+}
+
+.task:hover{
+  filter:brightness(1.08);
+  transform:translateY(-1px);
+}
+
+.task:active{
+  transform:scale(.98);
+}
+
+.task.youtube{
+  background:#f21d17;
+}
+
+.task.discord{
+  background:#5865F2;
+}
+
+.task.tiktok{
+  background:#111;
+}
+
+.task.done{
+  opacity:.55;
+  cursor:default;
+}
+
+.task span.icon{
+  margin-right:8px;
+}
+
+.discord-icon,
+.tiktok-icon{
+  display:inline-flex;
+  width:19px;
+  height:19px;
+  vertical-align:middle;
+  align-items:center;
+  justify-content:center;
+}
+
+.discord-icon svg,
+.tiktok-icon svg{
+  width:19px;
+  height:19px;
+  display:block;
+}
+
+.progress-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  font-size:13px;
+  margin:9px 0 8px;
+}
+
+.progress-row b{
+  color:#00e6a7;
+  white-space:nowrap;
+}
+
+.progress{
+  width:100%;
+  height:6px;
+  background:#444;
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  width:0%;
+  height:100%;
+  background:#00c88b;
+  transition:width .25s ease;
+}
+
+.unlock{
+  margin-top:12px;
+  background:#373737;
+  color:#999;
+  min-height:48px;
+  border-radius:12px;
+  border:0;
+  width:100%;
+  padding:10px;
+  font-size:14px;
+  font-weight:700;
+  touch-action:manipulation;
+}
+
+.unlock.ready{
+  background:#00a987;
+  color:#fff;
+  cursor:pointer;
+}
+
+.copy-box{
+  display:none;
+  margin-top:10px;
+}
+
+.script-text{
+  width:100%;
+  height:110px;
+  resize:none;
+  background:#111;
+  color:#00e6a7;
+  border:1px solid #444;
+  border-radius:10px;
+  padding:10px;
+  font-family:monospace;
+  font-size:12px;
+  line-height:1.4;
+  outline:none;
+}
+
+.copy-button{
+  width:100%;
+  min-height:48px;
+  margin-top:7px;
+  border:0;
+  border-radius:12px;
+  background:#00a987;
+  color:#fff;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+
+.copy-button:active{
+  transform:scale(.98);
+}
+
+.note{
+  text-align:center;
+  color:#888;
+  font-size:11px;
+  line-height:1.4;
+  margin-top:10px;
+  padding-bottom:5px;
+}
+
+
+/* CELULARES PEQUENOS */
+
+@media (max-width:400px){
+
+  .container{
+    max-width:none;
+    border-left:0;
+    border-right:0;
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .banner{
+    height:210px;
+  }
+
+  .title{
+    font-size:20px;
+  }
+
+  .subtitle{
+    font-size:13px;
+  }
+
+  .task{
+    font-size:14px;
+    min-height:50px;
+  }
+
+}
+
+
+/* CELULARES MUITO PEQUENOS */
+
+@media (max-width:340px){
+
+  .container{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .banner{
+    height:185px;
+  }
+
+  .title{
+    font-size:18px;
+  }
+
+  .task{
+    font-size:13px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<main class="container">
+
+  <img
+    class="banner"
+    src="Quantum.png"
+    alt="Blox Fruits"
+  >
+
+  <div class="title">
+    🍎 QuantumOnyx - BLOX FRUITS 🍎
+  </div>
+
+  <div class="subtitle">
+    Complete as Etapas Para Liberar o Script
+  </div>
+
+
+  <!-- ETAPA 1 -->
+  <button class="task youtube" data-task>
+    <span class="icon">▶</span>
+    Subscribe to channel
+  </button>
+
+
+  <!-- ETAPA 2 -->
+  <button class="task youtube" data-task>
+    <span class="icon">▶</span>
+    Like a video
+  </button>
+
+
+  <!-- ETAPA 3 -->
+  <button class="task youtube" data-task>
+    <span class="icon">▶</span>
+    Comment on a video
+  </button>
+
+
+  <!-- ETAPA 4 - DISCORD -->
+  <button class="task discord" data-task>
+
+    <span class="icon discord-icon">
+
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+
+        <path
+          fill="currentColor"
+          d="M19.54 5.05A16.2 16.2 0 0 0 15.5 3.8l-.49 1a15 15 0 0 0-6.02 0l-.49-1a16.2 16.2 0 0 0-4.04 1.25C1.9 8.87 1.2 12.58 1.55 16.24A16.3 16.3 0 0 0 6.5 18.75l1.2-1.65c-.66-.24-1.28-.55-1.86-.92l.45-.34a11.5 11.5 0 0 0 11.42 0l.45.34c-.58.37-1.2.68-1.86.92l1.2 1.65a16.3 16.3 0 0 0 4.95-2.51c.41-4.25-.7-7.92-3.91-11.19ZM8.5 14.15c-1.08 0-1.97-1-1.97-2.23s.87-2.23 1.97-2.23 1.98 1 1.97 2.23c0 1.23-.87 2.23-1.97 2.23Zm7 0c-1.08 0-1.97-1-1.97-2.23s.87-2.23 1.97-2.23 1.98 1 1.97 2.23c0 1.23-.87 2.23-1.97 2.23Z"
+        />
+
+      </svg>
+
+    </span>
+
+    Entrar no servidor Discord
+
+  </button>
+
+
+  <!-- ETAPA 5 - TIKTOK -->
+  <button class="task tiktok" data-task>
+
+    <span class="icon tiktok-icon">
+
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+
+        <path
+          fill="currentColor"
+          d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-2-2.74V9.4a6.34 6.34 0 1 0 5.45 6.27V8.7a8.16 8.16 0 0 0 4.77 1.52V6.8a4.85 4.85 0 0 1-1-.11Z"
+        />
+
+      </svg>
+
+    </span>
+
+    Seguir no TikTok
+
+  </button>
+
+
+  <!-- ETAPA 6 - TIKTOK -->
+  <button class="task tiktok" data-task>
+
+    <span class="icon tiktok-icon">
+
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+
+        <path
+          fill="currentColor"
+          d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-2-2.74V9.4a6.34 6.34 0 1 0 5.45 6.27V8.7a8.16 8.16 0 0 0 4.77 1.52V6.8a4.85 4.85 0 0 1-1-.11Z"
+        />
+
+      </svg>
+
+    </span>
+
+    Seguir no TikTok
+
+  </button>
+
+
+  <!-- PROGRESSO -->
+
+  <div class="progress-row">
+
+    <span>
+      Unlock progress
+    </span>
+
+    <b>
+      <span id="count">0</span>/6 done
+    </b>
+
+  </div>
+
+
+  <div class="progress">
+
+    <div
+      class="progress-fill"
+      id="fill">
+    </div>
+
+  </div>
+
+
+  <!-- BOTÃO UNLOCK -->
+
+  <button
+    class="unlock"
+    id="unlock"
+    disabled
+  >
+    🔒 &nbsp; Unlock Script
+  </button>
+
+
+  <!-- TEXTO LIBERADO -->
+
+  <div
+    class="copy-box"
+    id="copyBox"
+  >
+
+    <textarea
+      class="script-text"
+      id="scriptText"
+      readonly
+    >COLOQUE SEU TEXTO AQUI</textarea>
+
+
+    <button
+      class="copy-button"
+      id="copyButton"
+    >
+      📋 Copiar Texto
+    </button>
+
+  </div>
+
+
+  <div class="note">
+    Complete all actions to unlock the script.
+  </div>
+
+</main>
+
+
+<script>
+
+const tasks =
+  [...document.querySelectorAll("[data-task]")];
+
+const count =
+  document.getElementById("count");
+
+const fill =
+  document.getElementById("fill");
+
+const unlock =
+  document.getElementById("unlock");
+
+
+/*
+  LINKS DAS 6 ETAPAS
+*/
+
+const urls = [
+
+  // 1 - Subscribe YouTube
+  "https://www.youtube.com/@gg_Whiteez",
+
+  // 2 - Like
+  "https://youtu.be/-MGb4G3APSw?si=smOXipBYPkLZH7BW",
+
+  // 3 - Comment
+  "https://youtu.be/-MGb4G3APSw?si=smOXipBYPkLZH7BW",
+
+  // 4 - Discord
+  "https://discord.gg/Ctct7B8caB",
+
+  // 5 - TikTok
+  "https://www.tiktok.com/@ggwhite2conta?_r=1&_t=ZS-98zPAP7tOGu",
+
+  // 6 - TikTok
+  "https://www.tiktok.com/@negaomcnaj?_r=1&_t=ZS-98zPJbWGy4D"
+
+];
+
+
+tasks.forEach((task, i) => {
+
+  task.addEventListener("click", () => {
+
+    if(task.classList.contains("done"))
+      return;
+
+
+    if(urls[i]){
+      window.open(urls[i], "_blank");
+    }
+
+
+    task.classList.add("done");
+
+    task.innerHTML =
+      '<span class="icon">✓</span> Completed';
+
+
+    update();
+
+  });
+
+});
+
+
+/*
+  ATUALIZAR PROGRESSO
+*/
+
+function update(){
+
+  const done =
+    document.querySelectorAll(".task.done").length;
+
+
+  count.textContent = done;
+
+
+  fill.style.width =
+    (done / tasks.length * 100) + "%";
+
+
+  if(done === tasks.length){
+
+    unlock.disabled = false;
+
+    unlock.classList.add("ready");
+
+    unlock.innerHTML =
+      "🔓 &nbsp; Unlock Script";
+
+  }
+
+}
+
+
+/*
+  ABRIR ÁREA DO TEXTO
+*/
+
+unlock.addEventListener("click", () => {
+
+  if(!unlock.classList.contains("ready"))
+    return;
+
+
+  document.getElementById("copyBox")
+    .style.display = "block";
+
+
+  unlock.style.display = "none";
+
+});
+
+
+/*
+  COPIAR TEXTO
+*/
+
+document
+  .getElementById("copyButton")
+  .addEventListener("click", async () => {
+
+    const text =
+      document.getElementById("scriptText").value;
+
+
+    try{
+
+      await navigator.clipboard.writeText(text);
+
+      document.getElementById("copyButton")
+        .innerHTML = "✓ Copiado!";
+
+
+    }catch(error){
+
+      const textarea =
+        document.getElementById("scriptText");
+
+      textarea.select();
+
+      document.execCommand("copy");
+
+      document.getElementById("copyButton")
+        .innerHTML = "✓ Copiado!";
+
+    }
+
+
+    setTimeout(() => {
+
+      document.getElementById("copyButton")
+        .innerHTML = "📋 Copiar Texto";
+
+    }, 2000);
+
+  });
+
+</script>
+
+</body>
+</html>
